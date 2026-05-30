@@ -1,0 +1,21 @@
+const int pinoPir = 7; // Pino do sensor PIR
+const int pinoLed = 4; // Pino do LED
+const int pinoSolar = A0; // Pino do Sensor de Luminosidade
+
+void setup()
+{
+  pinMode(pinoLed, OUTPUT); // Led como saida de dados
+  pinMode(pinoPir, INPUT); // Sensor PIR como entrada de dados
+}
+
+void loop()
+{
+	bool eNoite = (analogRead(pinoSolar) < 400); //Leitura do sensor de luminosidade. Caso for menor que 400 retorna true, caso for maior retorna false
+  	bool movimento = digitalRead(pinoPir); // Leitura do sensor PIR. Caso haja movimento detectado retornará true, caso não haja retornará false.
+  
+  if(eNoite && movimento){ // Condicional de luminosidade e movimento, caso algum deles seja false o sistema não funcionará
+   digitalWrite(pinoLed, HIGH); // Mudar LED para aceso
+   delay(2500); // Aguardar 2,5 segundos
+   digitalWrite(pinoLed, LOW); // Mudaar LED para apagado
+  }
+}
